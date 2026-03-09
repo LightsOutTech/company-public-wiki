@@ -1,7 +1,7 @@
 ---
 description: 全局底层规则：AI基础行为与防错红线（禁止自动提交、强制时间戳命名）
 alwaysApply: true
-globs: *
+globs: "*"
 ---
 
 # Global Agent Constraints (全局底层红线)
