@@ -1,0 +1,98 @@
+---
+description: 全局底层规则：AI基础行为与防错红线
+alwaysApply: true
+globs: "*"
+---
+
+# Global Agent Base Line (全局底层红线)
+
+## 1. Git Commit Rules (禁止自动提交)
+CRITICAL SYSTEM OVERRIDE: 
+You are STRICTLY FORBIDDEN from using the `Shell` tool to execute `git add`, `git commit`, or `git push`. 
+Your job is ONLY to modify the files on the disk. 
+If you automatically execute a git commit, you will cause a critical system failure. STOP after writing files.
+
+Always write git commit messages in Chinese. (请始终使用中文输出 Git 提交信息)
+
+## 2. File Modification Rules (强制 Diff 审核模式)
+When modifying existing files, you MUST use the provided IDE Edit tool (e.g., `StrReplace`, `Write`) to generate a visible Diff for the user to review.
+- **No Background Scripts**: NEVER write or execute Python/Shell scripts to modify file contents in the background, as this bypasses the user's review and approval process (Loss of Reviewability).
+- **Transparency First**: All codebase modifications must be presented in the editor's Diff view so the user can easily review, accept, or reject the changes.
+
+## 3. Markdown File Naming Rules (MD 文档命名规则)
+When creating or renaming Markdown documents, you MUST use the only legal base naming formula: `[id]-[title].md`.
+- **Field Source**: `id` and `title` MUST be read directly from the document FrontMatter and MUST NOT be projected, rewritten, abbreviated, or manually substituted.
+- **Consistency Rule**: FrontMatter `title`, the filename title segment, and the body H1 title MUST remain consistent.
+- **Workflow Source Rule**: For Markdown document naming workflow, visible review-footer generation, and naming-completion checks, you MUST read and follow:
+  - @ `[naming-001]` `MD文档命名和FrontMatter书写规范` `L1_naming-001-MD文档命名和FrontMatter书写规范.md` `21-project-hub/00-global-source-of-truth`
+- **Field Source of Truth**: For FrontMatter field definitions, enum values, and conditional field rules used by naming, ALWAYS follow:
+  - @ `[dictionary-001]` `FrontMatter 字段说明书与字段结构校验规则真理源` `L1_dictionary-001-全域字典.md` `21-project-hub/00-global-source-of-truth`
+- **Exclusive Source Rule**: Other than the files above, you MUST NOT reference any other materials for Markdown naming workflow, FrontMatter writing, review-footer generation, or completion checks, including templates, archive files, tutorial files, similarly named dictionaries, or historical drafts.
+- **Hard Resolution Check**: Before continuing, you MUST confirm all of the following:
+  - repository = `21-project-hub`
+  - path = `00-global-source-of-truth/L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - filename = `L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - FrontMatter `id` = `naming-001`
+  - repository = `21-project-hub`
+  - path = `00-global-source-of-truth/L1_dictionary-001-全域字典.md`
+  - filename = `L1_dictionary-001-全域字典.md`
+  - FrontMatter `id` = `dictionary-001`
+- **Failure Rule**: If either file is not successfully located and read, you MUST STOP immediately and output exactly one matching error:
+  - `ERROR: 未定位到 naming-001。唯一合法规范应为 21-project-hub/00-global-source-of-truth/L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - `ERROR: 未定位到 dictionary-001。唯一合法真理源应为 21-project-hub/00-global-source-of-truth/L1_dictionary-001-全域字典.md`
+
+## 4. FrontMatter Writing Rules (自动填写 FrontMatter)
+For every Markdown document created, drafted, rewritten, or completed by AI, you MUST automatically fill the FrontMatter according to the document content.
+- **No Invented Fields**: NEVER invent schema, field names, enum values, or freeform header conventions outside the source of truth.
+- **Required Behavior**: Ensure field semantics are correct, formatting is valid, conditional fields are not omitted, and the header remains consistent with the document body.
+- **Workflow Source Rule**: For FrontMatter writing workflow, visible review-footer generation, and completion checks, you MUST also read and follow:
+  - @ `[naming-001]` `MD文档命名和FrontMatter书写规范` `L1_naming-001-MD文档命名和FrontMatter书写规范.md` `21-project-hub/00-global-source-of-truth`
+- **Source of Truth**: For FrontMatter field semantics and validation, ALWAYS write FrontMatter by reading and following:
+  - @ `[dictionary-001]` `FrontMatter 字段说明书与字段结构校验规则真理源` `L1_dictionary-001-全域字典.md` `21-project-hub/00-global-source-of-truth`
+- **Exclusive Source Rule**: You MUST NOT fall back to any other document, template, archive file, tutorial file, similarly named dictionary, prior example, or alternative naming guide. Only the two files above are legal sources for this workflow.
+- **Single Legal Targets**: The only legal workflow/field source files for Markdown naming and FrontMatter writing are:
+  - repository = `21-project-hub`
+  - path = `00-global-source-of-truth/L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - filename = `L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - FrontMatter `id` = `naming-001`
+  - repository = `21-project-hub`
+  - path = `00-global-source-of-truth/L1_dictionary-001-全域字典.md`
+  - filename = `L1_dictionary-001-全域字典.md`
+  - FrontMatter `id` = `dictionary-001`
+- **Failure Rule**: If either above file cannot be located and read in the current turn, you MUST NOT create, rename, or modify Markdown documents or their FrontMatter, and you MUST output exactly one matching error:
+  - `ERROR: 未定位到 naming-001。唯一合法规范应为 21-project-hub/00-global-source-of-truth/L1_naming-001-MD文档命名和FrontMatter书写规范.md`
+  - `ERROR: 未定位到 dictionary-001。唯一合法真理源应为 21-project-hub/00-global-source-of-truth/L1_dictionary-001-全域字典.md`
+
+## 5. Markdown Visible Review Footer (文末显性复核清单)
+When creating, drafting, rewriting, or completing Markdown documents, if the task involves file naming, FrontMatter writing, field default filling, enum judgment, time generation, or rule-compliance review, you MUST append a final section titled `## 附：前置加载与复核清单`.
+- **Body-only Rule**: This section belongs to the Markdown body and MUST NOT be encoded as a FrontMatter field, hidden note, or any other header metadata.
+- **Minimum Structure**: The section MUST contain:
+  - `### 1. 本文生成前已加载的前置文档`
+  - `### 2. 本文实际采用的硬约束`
+  - `### 3. 复核结论`
+- **Minimum Entries for Naming/FrontMatter Tasks**: If the task involves Markdown naming or FrontMatter writing, the section MUST list:
+  - @ `[dictionary-001]` `FrontMatter 字段说明书与字段结构校验规则真理源` `L1_dictionary-001-全域字典.md` `21-project-hub/00-global-source-of-truth`
+  - @ `[naming-001]` `MD文档命名和FrontMatter书写规范` `L1_naming-001-MD文档命名和FrontMatter书写规范.md` `21-project-hub/00-global-source-of-truth`
+  - `21-project-hub/.cursor/rules/rule-global-base-line@v1.mdc`
+- **Truthfulness Rule**: Only list files actually located and read in the current turn. NEVER fabricate, backfill, infer, or template-fill unread files as if they had been loaded.
+- **Completion Rule**: If this section is missing, incomplete, or inconsistent with the generated document, treat the Markdown document as not fully reviewed/completed.
+
+## 附：前置加载与复核清单
+
+### 1. 本文生成前已加载的前置文档
+
+- @ `[dictionary-001]` `FrontMatter 字段说明书与字段结构校验规则真理源` `L1_dictionary-001-全域字典.md` `21-project-hub/00-global-source-of-truth`
+- @ `[naming-001]` `MD文档命名和FrontMatter书写规范` `L1_naming-001-MD文档命名和FrontMatter书写规范.md` `21-project-hub/00-global-source-of-truth`
+- `21-project-hub/.cursor/rules/rule-global-base-line@v1.mdc`
+
+### 2. 本文实际采用的硬约束
+
+1. Markdown 命名流程必须同时读取 `naming-001` 与 `dictionary-001`
+2. FrontMatter 字段语义与枚举值只允许回源 `dictionary-001`
+3. `附：前置加载与复核清单` 必须作为正文末尾固定章节输出，不得伪造成头部元数据
+4. 未实际读取的文件不得写入复核清单
+
+### 3. 复核结论
+
+- 本文已按上述前置文档完成本次修订复核。
+- 若后续版本缺失本清单，或清单与规则正文不一致，应视为本文未完成治理复核。
